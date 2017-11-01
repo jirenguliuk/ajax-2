@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>hello</title>
+</head>
+<body>
+   <script>  
+
+   // get
+   var xhr = new XMLHttpRequest()
+   xhr.open("GET","/login?username=liukang&passworld=123",true)
+   xhr.send()
+   console.log("readyState:",xhr.readyState)
+   xhr.addEventListener("readystatechange",function(){
+       console.log("readyState:",xhr.readyState)
+   })
+
+   xhr.addEventListener("load",function(){
+    console.log(xhr.status)
+    if((xhr.status >=200 && xhr.status<300)||xhr.status === 304){
+        var data = xhr.responseText
+        console.log(data)    
+    }else{
+        console.log("error")
+    }
+     //断网
+     xhr.onerror = function(){
+         console.log("error")
+     }
+     //超时xhr.ontimeout
+
+   })
+
+
+
+   //post
+   var xhr = new XMLHttpRequest()
+   xhr.open("POST","/login",true)
+   xhr.send( makeUrl({
+       "name":"liukang",
+       "age": 2
+   })
+)
+   console.log("readyState:",xhr.readyState)
+   xhr.addEventListener("readystatechange",function(){
+       console.log("readyState:",xhr.readyState)
+   })
+
+   xhr.addEventListener("load",function(){
+    console.log(xhr.status)
+    if((xhr.status >=200 && xhr.status<300)||xhr.status === 304){
+        var data = xhr.responseText
+        console.log(data)    
+    }else{
+        console.log("error")
+    }
+     //断网
+     xhr.onerror = function(){
+         console.log("error")
+     }
+     //超时xhr.ontimeout
+
+   })
+
+
+   makeUrl({
+       "name":"liukang",
+       "age": 2
+   })
+
+   
+    function makeUrl(obj){
+        var arr = []
+      for(var key in obj){
+          arr.push("key"+"="+obj[key])
+        
+      }
+      return arr.join("&")   
+    }
+
+   </script> 
+</body>
+</html>
